@@ -1,0 +1,9 @@
+{
+    "name": "zmccauley/wp-battlenet-plugin",
+    "autoload": {
+        "psr-4": {
+            "Zmccauley\\WpBattlenetPlugin\\": "src/"
+        }
+    },
+    "require": {}
+}

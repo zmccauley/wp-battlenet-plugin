@@ -1,0 +1,1 @@
+alias plug='cd /var/www/html/wp-content/plugins/wp-battlenet-plugin'
