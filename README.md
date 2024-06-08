@@ -1,0 +1,1 @@
+# wp-battlenet-plugin
