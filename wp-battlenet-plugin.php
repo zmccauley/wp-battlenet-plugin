@@ -8,3 +8,10 @@
 add_action('init', function () {
     error_log('Hello World');
 });
+
+function say_something(){
+    return '<h1>HELLO I AM SAYING SOMETHING</h1>';
+}
+add_shortcode('saySomething', 'say_something');
+
+?>
