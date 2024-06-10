@@ -1,0 +1,39 @@
+services:
+  db:
+    image: mysql:8.4
+    restart: always
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+      MYSQL_RANDOM_ROOT_PASSWORD: false 
+    ports:
+      - 3306:3306
+    volumes:
+      - db:/var/lib/mysql
+
+  wordpress:
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_HOME', 'http://localhost:8080');
+        define('WP_SITEURL', 'http://localhost:8080');
+      WORDPRESS_DEBUG: 1
+    volumes:
+      - ./:/var/www/html/wp-content/plugins/wp-battlenet-plugin
+      - ./.devcontainer/.bashrc:/root/.bashrc
+
+volumes:
+  wordpress:
+  db:
