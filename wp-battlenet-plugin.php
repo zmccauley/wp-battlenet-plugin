@@ -9,9 +9,9 @@ add_action('init', function () {
     error_log('Hello World');
 });
 
-function say_something(){
+function say_something_func(){
     return '<h1>HELLO I AM SAYING SOMETHING</h1>';
 }
-add_shortcode('say_something', 'say_something');
+add_shortcode('say_something', say_something_func());
 
 ?>
