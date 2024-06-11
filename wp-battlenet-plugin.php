@@ -12,6 +12,6 @@ add_action('init', function () {
 function say_something_func(){
     return '<h1>HELLO I AM SAYING SOMETHING</h1>';
 }
-add_shortcode('say_something', say_something_func());
+add_shortcode('say_something', 'say_something_func');
 
 ?>
