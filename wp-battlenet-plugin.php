@@ -13,7 +13,12 @@ function say_something_func(){
     return '<h1>HELLO I AM SAYING SOMETHING</h1>';
 }
 add_shortcode('say_something', 'say_something_func');
-/**google hire me bro */
+
+
+function blizzard_call_func($blizz_id){
+  return '<h1>THIS IS WORKING???</h1>';
+}
+add_shortcode('blizzard_call','blizzard_call_func');
 
 add_action('admin_menu', 'fsdapikey_register_my_api_keys_page');
 
