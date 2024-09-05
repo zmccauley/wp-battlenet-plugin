@@ -34,7 +34,7 @@ function blizzard_call_func($region = 'us', $namespace = 'dynamic-us', $locale =
   $access_token=token_call();
   $url="https://{$region}.api.blizzard.com/data/wow/token/?namespace={$namespace}&locale={$locale}";
   $headers = [
-    "Authorization: Bearer " . $accessToken
+    "Authorization: Bearer " . $access_token
 ];
   $curl=curl_init();
   curl_setopt($curl, CURLOPT_URL, $url);
