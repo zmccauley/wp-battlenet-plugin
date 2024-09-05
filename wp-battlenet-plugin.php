@@ -34,8 +34,8 @@ function blizzard_call_func($blizz_id){
   $access_token=token_call();
   $params = [':region'=>'us', 'namespace' => 'dynamic-us','locale' => 'en_US'];
   $curl = curl_init();
-  curl_setopt( $ch, CURLOPT_CUSTOMREQUEST, 'GET' );
-  curl_setopt( $ch, CURLOPT_POSTFIELDS, $params );
+  curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET' );
+  curl_setopt($curl, CURLOPT_POSTFIELDS, $params );
   curl_setopt($curl, CURLOPT_URL, 'https://us.api.blizzard.com/data/wow/token/');
   curl_setopt($curl, CURLOPT_HEADER, 'Authorization: Bearer ' .$access_token);
   $result = curl_exec($curl);
