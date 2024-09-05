@@ -41,7 +41,12 @@ function blizzard_call_func($blizz_id){
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
   $result = curl_exec($curl);
   curl_close($curl);
-  return $result;
+  if($result != ''){
+    return 'nice';
+  } else {
+    return 'not nice';
+  }
+  //return $result;
 }
 
 add_shortcode('blizzard_call','blizzard_call_func');
