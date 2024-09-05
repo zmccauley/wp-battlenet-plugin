@@ -30,8 +30,11 @@ function token_call(){
 }
 
 //token cost 
-function blizzard_call_func($region = 'us', $namespace = 'dynamic-us', $locale = 'en_US'){
+function blizzard_call_func(){
   $access_token=token_call();
+  $region = 'us';
+  $namespace = 'dynamic-us';
+  $locale = 'en_US';
   $url="https://{$region}.api.blizzard.com/data/wow/token/?namespace={$namespace}&locale={$locale}";
   $headers = [
     "Authorization: Bearer " . $access_token
