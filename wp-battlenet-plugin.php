@@ -17,7 +17,7 @@ function token_call(){
   $client_id = '378d881c66dd4d1fa6a3453d450d93fe';
   $client_secret = '3vDFGG2AvWJHG49XeCqpYBRoDRO3Cdgf';
   $url = "https://us.battle.net/oauth/token";
-  $params = ['grant_type'=>'client_credentials'];
+  $params = ['grant_type'=>'client_credentials', 'scope' => 'wow.profile'];
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_POST, true);
   curl_setopt($curl, CURLOPT_URL, $url);
@@ -30,8 +30,9 @@ function token_call(){
 }
 
 function blizzard_call_func($blizz_id){
+ // /profile/user/wow/protected-character/{realmId}-{characterId}
   $access_token=token_call();
-  //curl -H "Authorization: Bearer {access_token}" https://us.api.blizzard.com/data/wow/token/?namespace=dynamic-us
+  //curl -H "Authorization: Bearer {access_token}" https://us.api.blizzard.com/profile/user/wow/protected-character/{realmId}-{characterId}
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_URL, 'https://us.api.blizzard.com/data/wow/token/?namespace=dynamic-us');
   curl_setopt($curl, CURLOPT_HEADER, 'Authorization: Bearer ' .$access_token);
