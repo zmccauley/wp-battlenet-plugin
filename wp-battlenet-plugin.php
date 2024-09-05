@@ -29,12 +29,13 @@ function token_call(){
   return json_decode($result)->access_token;
 }
 
+//token cost 
 function blizzard_call_func($blizz_id){
- // /profile/user/wow/protected-character/{realmId}-{characterId}
   $access_token=token_call();
-  //curl -H "Authorization: Bearer {access_token}" https://us.api.blizzard.com/profile/user/wow/protected-character/{realmId}-{characterId}
+  $params = [':region'=>'us', 'namespace' => 'dynamic-us','locale' => 'en_US'];
   $curl = curl_init();
-  curl_setopt($curl, CURLOPT_POST, false);
+  curl_setopt( $ch, CURLOPT_CUSTOMREQUEST, 'GET' );
+  curl_setopt( $ch, CURLOPT_POSTFIELDS, $params );
   curl_setopt($curl, CURLOPT_URL, 'https://us.api.blizzard.com/data/wow/token/');
   curl_setopt($curl, CURLOPT_HEADER, 'Authorization: Bearer ' .$access_token);
   $result = curl_exec($curl);
