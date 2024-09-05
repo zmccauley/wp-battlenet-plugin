@@ -37,7 +37,7 @@ function blizzard_call_func($blizz_id){
   curl_setopt($curl, CURLOPT_HEADER, 'Authorization: Bearer ' .$access_token);
   $result = curl_exec($curl);
   curl_close($curl);
-  return $result;
+  return  istype($result);
 }
 
 add_shortcode('blizzard_call','blizzard_call_func');
