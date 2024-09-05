@@ -45,7 +45,8 @@ function blizzard_call_func(){
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
   $result = curl_exec($curl);
   curl_close($curl);
-  return json_decode($result)->price;
+  $gold_value = int json_decode($result)-> price / 100 / 100
+  return $gold_value;
 }
 
 add_shortcode('blizzard_call','blizzard_call_func');
