@@ -32,7 +32,7 @@ function token_call(){
 function blizzard_call_func($blizz_id){
   $token_arr=token_call();
   
-  return get_type($token_arr);
+  return gettype($token_arr);
 }
 add_shortcode('blizzard_call','blizzard_call_func');
 
