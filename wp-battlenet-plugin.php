@@ -30,9 +30,9 @@ function token_call(){
 }
 
 function blizzard_call_func($blizz_id){
-  $token_arr=get_object_vars(token_call());
+  $token_arr=token_call();
   
-  return $token_arr;
+  return get_type($token_arr);
 }
 add_shortcode('blizzard_call','blizzard_call_func');
 
