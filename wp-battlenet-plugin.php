@@ -33,7 +33,6 @@ function blizzard_call_func($blizz_id){
   $access_token=token_call();
   //curl -H "Authorization: Bearer {access_token}" https://us.api.blizzard.com/data/wow/token/?namespace=dynamic-us
   $curl = curl_init();
-  curl_setopt($curl, CURLOPT_POST, true);
   curl_setopt($curl, CURLOPT_URL, 'https://us.api.blizzard.com/data/wow/token/?namespace=dynamic-us');
   curl_setopt($curl, CURLOPT_HEADER, 'Authorization: Bearer ' .$access_token);
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
