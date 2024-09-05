@@ -5,18 +5,34 @@
  * Description: A plugin that provides shortcodes for Battle.net API
  * Version: 0.0.0
  */
-add_action('init', function () {
-    error_log('Hello World');
-});
 
-function say_something_func(){
-    return '<h1>HELLO I AM SAYING SOMETHING</h1>';
+/**
+ * API CREDENTIALS
+ */
+define ('CLIENT_ID', '');
+define ('CLIENT_SECRET', '3');
+
+function token_call(){
+  $curl = curl_init();
+$auth_data = array(
+	'CLIENT_ID' 		=> '378d881c66dd4d1fa6a3453d450d93fe',
+	'CLIENT_SECRET' 	=> 'vDFGG2AvWJHG49XeCqpYBRoDRO3Cdgf',
+	'grant_type' 		=> 'client_credentials'
+);
+curl_setopt($curl, CURLOPT_POST, 1);
+curl_setopt($curl, CURLOPT_POSTFIELDS, $auth_data);
+curl_setopt($curl, CURLOPT_URL, 'https://oauth.battle.net/token');
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+$result = curl_exec($curl);
+if(!$result){die("Connection Failure");}
+curl_close($curl);
+return $result;
 }
-add_shortcode('say_something', 'say_something_func');
-
 
 function blizzard_call_func($blizz_id){
-  return '<h1>THIS IS WORKING???</h1>';
+  $token_string=token_call();
+  return 'token string:' + $token_string;
 }
 add_shortcode('blizzard_call','blizzard_call_func');
 
