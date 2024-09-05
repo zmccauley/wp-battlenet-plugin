@@ -32,15 +32,15 @@ function token_call(){
 //token cost 
 function blizzard_call_func($blizz_id){
   $access_token=token_call();
-  
+  $params = [':region'=>'us', 'namespace' => 'dynamic-us','locale' => 'en_US'];
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET' );
   curl_setopt($curl, CURLOPT_POSTFIELDS, $params );
   curl_setopt($curl, CURLOPT_URL, 'https://us.api.blizzard.com/data/wow/auctions/commodities');
-  curl_setopt($curl, CURLOPT_HEADER, 'Authorization: Bearer ' .$access_token);
+  curl_setopt($curl, CURLOPT_HEADER, 'Authorization: Bearer '.$access_token);
   $result = curl_exec($curl);
   curl_close($curl);
-  return  $result;
+  return $result;
 }
 
 add_shortcode('blizzard_call','blizzard_call_func');
