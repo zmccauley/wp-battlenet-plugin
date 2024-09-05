@@ -30,9 +30,15 @@ function token_call(){
 }
 
 function blizzard_call_func($blizz_id){
-  $token_string=token_call();
-  
-  return $token_string;
+  $access_token=token_call();
+  //curl -H "Authorization: Bearer {access_token}" https://us.api.blizzard.com/data/wow/token/?namespace=dynamic-us
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_POST, true);
+  curl_setopt($curl, CURLOPT_URL, 'https://us.api.blizzard.com/data/wow/token/?namespace=dynamic-us');
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  $result = curl_exec($curl);
+  curl_close($curl);
+  return $result;
 }
 add_shortcode('blizzard_call','blizzard_call_func');
 
