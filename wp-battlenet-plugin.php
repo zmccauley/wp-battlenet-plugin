@@ -34,7 +34,7 @@ function blizzard_call_func($blizz_id){
   $access_token=token_call();
   //curl -H "Authorization: Bearer {access_token}" https://us.api.blizzard.com/profile/user/wow/protected-character/{realmId}-{characterId}
   $curl = curl_init();
-  curl_setopt($ch, CURLOPT_POST, false);
+  curl_setopt($curl, CURLOPT_POST, false);
   curl_setopt($curl, CURLOPT_URL, 'https://us.api.blizzard.com/data/wow/token/');
   curl_setopt($curl, CURLOPT_HEADER, 'Authorization: Bearer ' .$access_token);
   $result = curl_exec($curl);
