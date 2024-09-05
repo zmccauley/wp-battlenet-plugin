@@ -30,14 +30,12 @@ function token_call(){
 }
 
 //token cost 
-function blizzard_call_func($blizz_id){
+function blizzard_call_func($region = 'us', $namespace = 'dynamic-us', $locale = 'en_US'){
   $access_token=token_call();
-  $params = ['region'=>'us', 'namespace' => 'static-us','locale' => 'en_US'];
-  $curl = curl_init();
-  curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET' );
-  curl_setopt($curl, CURLOPT_POSTFIELDS, $params );
-  curl_setopt($curl, CURLOPT_URL, 'https://us.api.blizzard.com/data/wow/token/index');
-  curl_setopt($curl, CURLOPT_HEADER, 'Authorization: Bearer '.$access_token);
+  $url="https://{$region}.api.blizzard.com/data/wow/token/?namespace={$namespace}&locale={$locale}";
+  $curl=curl_init();
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_HTTPHEADER, "Authorization: Bearer ".$access_token);
   $result = curl_exec($curl);
   curl_close($curl);
   return $result;
