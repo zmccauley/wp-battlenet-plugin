@@ -38,8 +38,8 @@ function blizzard_call_func($blizz_id){
   $result = curl_exec($curl);
   curl_close($curl);
   return $result;
-
 }
+
 add_shortcode('blizzard_call','blizzard_call_func');
 
 add_action('admin_menu', 'fsdapikey_register_my_api_keys_page');
