@@ -32,7 +32,7 @@ return $result;
 
 function blizzard_call_func($blizz_id){
   $token_string=token_call();
-  return 'token string:' + $token_string;
+  return '<h1>{$token_string}</h1>'
 }
 add_shortcode('blizzard_call','blizzard_call_func');
 
