@@ -27,7 +27,7 @@ curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 $result = curl_exec($curl);
 if(!$result){die("Connection Failure");}
 curl_close($curl);
-return json_decode($result);
+return json_decode($result, true);
 }
 
 function blizzard_call_func($blizz_id){
