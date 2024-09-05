@@ -38,6 +38,7 @@ function blizzard_call_func($blizz_id){
   curl_setopt($curl, CURLOPT_POSTFIELDS, $params );
   curl_setopt($curl, CURLOPT_URL, 'https://us.api.blizzard.com/data/wow/auctions/commodities');
   curl_setopt($curl, CURLOPT_HEADER, 'Authorization: Bearer '.$access_token);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
   $result = curl_exec($curl);
   curl_close($curl);
   return $result;
