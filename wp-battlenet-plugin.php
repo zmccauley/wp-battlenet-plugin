@@ -27,12 +27,12 @@ curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 $result = curl_exec($curl);
 if(!$result){die("Connection Failure");}
 curl_close($curl);
-return $result;
+return json_decode($result);
 }
 
 function blizzard_call_func($blizz_id){
-  $token_string=token_call();
-  return $token_string[1];
+  $token_arr=token_call();
+  return $token_arr[1];
 }
 add_shortcode('blizzard_call','blizzard_call_func');
 
