@@ -26,13 +26,13 @@ function token_call(){
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
   $result = curl_exec($curl);
   curl_close($curl);
-  return $result;
+  return json_decode($result)->access_token;
 }
 
 function blizzard_call_func($blizz_id){
-  $token_arr=explode(",",token_call());
+  $token_string=token_call();
   
-  return $token_arr[0];
+  return $token_string;
 }
 add_shortcode('blizzard_call','blizzard_call_func');
 
