@@ -13,21 +13,20 @@ define ('CLIENT_ID', '');
 define ('CLIENT_SECRET', '3');
 
 function token_call(){
-  $curl = curl_init();
-$auth_data = array(
-	'CLIENT_ID' 		=> '378d881c66dd4d1fa6a3453d450d93fe',
-	'CLIENT_SECRET' 	=> 'vDFGG2AvWJHG49XeCqpYBRoDRO3Cdgf',
-	'grant_type' 		=> 'client_credentials'
-);
-curl_setopt($curl, CURLOPT_POST, 1);
-curl_setopt($curl, CURLOPT_POSTFIELDS, $auth_data);
-curl_setopt($curl, CURLOPT_URL, 'https://oauth.battle.net/token');
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-$result = curl_exec($curl);
-if(!$result){die("Connection Failure");}
-curl_close($curl);
-return json_decode($result, true);
+  //curl -u {client_id}:{client_secret} -d grant_type=client_credentials https://us.battle.net/oauth/token
+  $client_id = '378d881c66dd4d1fa6a3453d450d93fe';
+  $client_secret = '3vDFGG2AvWJHG49XeCqpYBRoDRO3Cdgf';
+  $url = "https://us.battle.net/oauth/token";
+  $params = ['grant_type'=>'client_credentials'];
+   $curl = curl_init();
+  curl_setopt($curl, CURLOPT_POST, true);
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+  curl_setopt($curl, CURLOPT_USERPWD, $client_id.':'.$client_secret);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  $result = json_decode(curl_exec($curl));
+  curl_close($curl);
+  return $result;
 }
 
 function blizzard_call_func($blizz_id){
