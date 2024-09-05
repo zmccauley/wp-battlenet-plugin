@@ -32,7 +32,7 @@ function token_call(){
 //token cost 
 function blizzard_call_func($blizz_id){
   $access_token=token_call();
-  $params = [':region'=>'us', 'namespace' => 'dynamic-us','locale' => 'en_US'];
+  $params = ['region'=>'us', 'namespace' => 'static-us','locale' => 'en_US'];
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET' );
   curl_setopt($curl, CURLOPT_POSTFIELDS, $params );
