@@ -18,13 +18,13 @@ function token_call(){
   $client_secret = '3vDFGG2AvWJHG49XeCqpYBRoDRO3Cdgf';
   $url = "https://us.battle.net/oauth/token";
   $params = ['grant_type'=>'client_credentials'];
-   $curl = curl_init();
+  $curl = curl_init();
   curl_setopt($curl, CURLOPT_POST, true);
   curl_setopt($curl, CURLOPT_URL, $url);
   curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
   curl_setopt($curl, CURLOPT_USERPWD, $client_id.':'.$client_secret);
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-  $result = json_decode(curl_exec($curl));
+  $result = curl_exec($curl);
   curl_close($curl);
   return $result;
 }
