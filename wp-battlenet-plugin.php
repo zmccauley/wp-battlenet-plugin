@@ -25,7 +25,7 @@ function token_call($client_id,$client_secret){
 }
 
 //token cost 
-function blizzard_call_func(){
+function blizzard_call_func($client_id,$client_secret){
   $access_token=token_call($client_id,$client_secret);
   $region = 'us';
   $namespace = 'dynamic-us';
