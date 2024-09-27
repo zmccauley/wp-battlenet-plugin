@@ -41,7 +41,7 @@ function blizzard_call_func($client_id,$client_secret){
   $result = curl_exec($curl);
   curl_close($curl);
   $gold_value = number_format(intval(json_decode($result)-> price) / 100 / 100);
-  return "<h1>The present value of a WoW token is {$gold_value} gold {$client_id} {$client_secret}";
+  return "<h1>The present value of a WoW token is {$gold_value} gold 1{$client_id} 2{$client_secret}";
 }
 
 add_shortcode('blizzard_call','blizzard_call_func');
