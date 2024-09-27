@@ -10,9 +10,7 @@ global $wpdb;
 $client_secret = $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_secret'");
 $client_id = $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_id'");
 
-function token_call(){
-  $client_id;
-  $client_secret;
+function token_call($client_id,$client_secret){
   $url = "https://us.battle.net/oauth/token";
   $params = ['grant_type'=>'client_credentials', 'scope' => 'wow.profile'];
   $curl = curl_init();
@@ -28,7 +26,7 @@ function token_call(){
 
 //token cost 
 function blizzard_call_func(){
-  $access_token=token_call();
+  $access_token=token_call($client_id,$client_secret);
   $region = 'us';
   $namespace = 'dynamic-us';
   $locale = 'en_US';
