@@ -12,10 +12,10 @@
 define ('CLIENT_ID', '');
 define ('CLIENT_SECRET', '3');
 
+$client_secret = $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_secret'");
+$client_id = $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_id'");
+
 function token_call(){
-  //curl -u {client_id}:{client_secret} -d grant_type=client_credentials https://us.battle.net/oauth/token
-  $client_id = '378d881c66dd4d1fa6a3453d450d93fe';
-  $client_secret = '3vDFGG2AvWJHG49XeCqpYBRoDRO3Cdgf';
   $url = "https://us.battle.net/oauth/token";
   $params = ['grant_type'=>'client_credentials', 'scope' => 'wow.profile'];
   $curl = curl_init();
@@ -152,3 +152,5 @@ function fsdapikey_submit_api_key() {
     wp_redirect($_SERVER['HTTP_REFERER'] . '&status=1');
 }
 ?>
+
+
