@@ -6,13 +6,7 @@
  * Version: 0.0.0
  */
 
-/**
- * API CREDENTIALS
- */
-define ('CLIENT_ID', '');
-define ('CLIENT_SECRET', '3');
-
-
+global $wpdb;
 
 function token_call(){
   $client_secret = $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_secret'");
