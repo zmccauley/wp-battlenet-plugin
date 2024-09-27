@@ -5,12 +5,20 @@
  * Description: A plugin that provides shortcodes for Battle.net API
  * Version: 0.0.0
  */
-global $wpdb;
 
-$client_secret = $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_secret'");
-$client_id = $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_id'");
 
-function token_call($client_id,$client_secret){
+function get_credentials() {
+  global $wpdb;
+  return [
+      'client_id' => $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_id'"),
+      'client_secret' => $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_secret'")
+  ];
+}
+
+// https://stitcher.io/blog/array-destructuring-with-list-in-php
+[$client_id, $client_secret] = get_credentials();
+
+function token_call($client_id, $client_secret) {
   $url = "https://us.battle.net/oauth/token";
   $params = ['grant_type'=>'client_credentials', 'scope' => 'wow.profile'];
   $curl = curl_init();
@@ -24,16 +32,15 @@ function token_call($client_id,$client_secret){
   return json_decode($result)->access_token;
 }
 
-//token cost 
-function blizzard_call_func($client_id,$client_secret){
-  $access_token=token_call($client_id,$client_secret);
+function blizzard_call_func($client_id, $client_secret) {
+  $access_token=token_call($client_id, $client_secret);
   $region = 'us';
   $namespace = 'dynamic-us';
   $locale = 'en_US';
   $url="https://{$region}.api.blizzard.com/data/wow/token/?namespace={$namespace}&locale={$locale}";
   $headers = [
-    "Authorization: Bearer " . $access_token
-];
+      "Authorization: Bearer " . $access_token
+  ];
   $curl=curl_init();
   curl_setopt($curl, CURLOPT_URL, $url);
   curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
@@ -41,8 +48,12 @@ function blizzard_call_func($client_id,$client_secret){
   $result = curl_exec($curl);
   curl_close($curl);
   $gold_value = number_format(intval(json_decode($result)-> price) / 100 / 100);
-  return "<h1>The present value of a WoW token is {$gold_value} gold 1{$client_id} 2{$client_secret}";
+  return "<h1>The present value of a WoW token is {$gold_value} gold";
 }
+
+add_shortcode('blizzard_call',function () use ($client_id, $client_secret) {
+  return blizzard_call_func($client_id, $client_secret);
+});
 
 add_shortcode('blizzard_call','blizzard_call_func');
 
