@@ -80,7 +80,7 @@ function fsdapikey_add_api_keys_callback() { ?>
 
         ?>
         <form action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" method="POST">
-
+            
             <h3>Client_ID</h3>
 
             <!-- The nonce field is a security feature to avoid submissions from outside WP admin -->
@@ -89,6 +89,18 @@ function fsdapikey_add_api_keys_callback() { ?>
             <input type="password" name="our_client_id" placeholder="Enter Client ID" value="<?php echo $api_key ? esc_attr( $api_key ) : '' ; ?>">
             <input type="hidden" name="action" value="fsdapikey_external_api">			 
             <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update Client ID"  />
+        </form> 
+
+            <form action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" method="POST">
+
+            <h3>Client_Secret</h3>
+
+            <!-- The nonce field is a security feature to avoid submissions from outside WP admin -->
+            <?php wp_nonce_field( 'fsdapikey_api_options_verify'); ?>
+
+            <input type="password" name="our_client_secret" placeholder="Enter Client Secret" value="<?php echo $api_key ? esc_attr( $api_key ) : '' ; ?>">
+            <input type="hidden" name="action" value="fsdapikey_external_api">			 
+            <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update Client Secret"  />
         </form> 
     <?php
 }
@@ -108,18 +120,34 @@ function fsdapikey_submit_api_key() {
     if (isset($_POST['our_client_id'])) {
 
 
-        $api_key = sanitize_text_field( $_POST['our_client_id'] );
+      $api_key = sanitize_text_field( $_POST['our_client_id'] );
 
-        $api_exists = get_option('our_client_id');
+      $api_exists = get_option('our_client_id');
 
-        if (!empty($api_key) && !empty($api_exists)) {
-            // Update
-            update_option('our_client_id', $api_key);
-        } else {
-            // Add option on first save
-            add_option('our_client_id', $api_key);
-        }
+      if (!empty($api_key) && !empty($api_exists)) {
+          // Update
+          update_option('our_client_id', $api_key);
+      } else {
+          // Add option on first save
+          add_option('our_client_id', $api_key);
+      }
+  }
+
+  if (isset($_POST['our_client_secret'])) {
+
+
+    $api_key = sanitize_text_field( $_POST['our_client_secret'] );
+
+    $api_exists = get_option('our_client_secret');
+
+    if (!empty($api_key) && !empty($api_exists)) {
+        // Update
+        update_option('our_client_secret', $api_key);
+    } else {
+        // Add option on first save
+        add_option('our_client_secret', $api_key);
     }
+}
     // Redirect to same page with status=1 to show our options updated banner
     wp_redirect($_SERVER['HTTP_REFERER'] . '&status=1');
 }
