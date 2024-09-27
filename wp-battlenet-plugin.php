@@ -81,16 +81,15 @@ function fsdapikey_add_api_keys_callback() { ?>
         ?>
         <form action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" method="POST">
 
-            <h3>Your API Key</h3>
+            <h3>Client_ID</h3>
 
             <!-- The nonce field is a security feature to avoid submissions from outside WP admin -->
             <?php wp_nonce_field( 'fsdapikey_api_options_verify'); ?>
 
-            <input type="password" name="our_api_key" placeholder="Enter API Key" value="<?php echo $api_key ? esc_attr( $api_key ) : '' ; ?>">
+            <input type="password" name="our_client_id" placeholder="Enter Client ID" value="<?php echo $api_key ? esc_attr( $api_key ) : '' ; ?>">
             <input type="hidden" name="action" value="fsdapikey_external_api">			 
-            <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update API Key"  />
+            <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update Client ID"  />
         </form> 
-    </div>
     <?php
 }
 add_action( 'admin_post_fsdapikey_external_api', 'fsdapikey_submit_api_key' );
@@ -106,19 +105,19 @@ function fsdapikey_submit_api_key() {
     check_admin_referer( 'fsdapikey_api_options_verify');
 
 
-    if (isset($_POST['our_api_key'])) {
+    if (isset($_POST['our_client_id'])) {
 
 
-        $api_key = sanitize_text_field( $_POST['our_api_key'] );
+        $api_key = sanitize_text_field( $_POST['our_client_id'] );
 
-        $api_exists = get_option('our_api_key');
+        $api_exists = get_option('our_client_id');
 
         if (!empty($api_key) && !empty($api_exists)) {
             // Update
-            update_option('our_api_key', $api_key);
+            update_option('our_client_id', $api_key);
         } else {
             // Add option on first save
-            add_option('our_api_key', $api_key);
+            add_option('our_client_id', $api_key);
         }
     }
     // Redirect to same page with status=1 to show our options updated banner
