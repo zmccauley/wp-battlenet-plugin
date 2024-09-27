@@ -5,14 +5,13 @@
  * Description: A plugin that provides shortcodes for Battle.net API
  * Version: 0.0.0
  */
+global $wpdb;
 
-
-define ('CLIENT_ID', '');
-define ('CLIENT_SECRET', '3');
+$client_secret = $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_secret'");
+$client_id = $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_id'");
 
 function token_call(){
-  $client_secret = $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_secret'");
-  $client_id = $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_id'");
+  
   $url = "https://us.battle.net/oauth/token";
   $params = ['grant_type'=>'client_credentials', 'scope' => 'wow.profile'];
   $curl = curl_init();
@@ -149,5 +148,3 @@ function fsdapikey_submit_api_key() {
     wp_redirect($_SERVER['HTTP_REFERER'] . '&status=1');
 }
 ?>
-
-
