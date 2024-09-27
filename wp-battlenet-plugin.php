@@ -59,6 +59,11 @@ add_shortcode('blizzard_call','blizzard_call_func');
 
 add_action('admin_menu', 'fsdapikey_register_my_api_keys_page');
 
+add_shortcode('blizzard_call',function () use ($client_id, $client_secret) {
+  var_dump($client_id, $client_secret);die;
+  return blizzard_call_func($client_id, $client_secret);
+});
+
 function fsdapikey_register_my_api_keys_page() {
   add_submenu_page(
     'tools.php', // Add our page under the "Tools" menu
