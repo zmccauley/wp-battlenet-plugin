@@ -7,15 +7,16 @@
  */
 
 
-function get_credentials() {
+ function get_credentials() {
   global $wpdb;
+  // Return an indexed array
   return [
-      'client_id' => $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_id'"),
-      'client_secret' => $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_secret'")
+      $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_id'"),
+      $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_secret'")
   ];
 }
 
-// https://stitcher.io/blog/array-destructuring-with-list-in-php
+// Destructure the indexed array
 [$client_id, $client_secret] = get_credentials();
 
 function token_call($client_id, $client_secret) {
