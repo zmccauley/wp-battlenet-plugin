@@ -13,7 +13,8 @@ global $client_id;
 global $client_secret;
 
 function token_call(){
-
+  $client_id;
+  $client_secret;
   $url = "https://us.battle.net/oauth/token";
   $params = ['grant_type'=>'client_credentials', 'scope' => 'wow.profile'];
   $curl = curl_init();
