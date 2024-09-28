@@ -22,6 +22,9 @@ if (is_resource($client_secret)) {
     $client_secret = stream_get_contents($client_secret);
 }
 
+// Output the values (for debugging purposes)
+echo 'Client ID: ' . esc_html($client_id) . '<br>';
+echo 'Client Secret: ' . esc_html($client_secret);
 
 function token_call(string $client_id,string $client_secret) {
   $url = "https://us.battle.net/oauth/token";
