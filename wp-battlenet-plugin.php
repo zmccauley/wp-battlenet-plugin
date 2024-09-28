@@ -25,6 +25,11 @@ if (is_resource($client_secret)) {
 
 
 function token_call($client_id,$client_secret) {
+  // Output the values (for debugging purposes)
+echo 'Client ID: ' . esc_html($client_id) . '<br>';
+echo 'Client Secret: ' . esc_html($client_secret);
+echo 'Client ID: ' . esc_html(var_dump($client_id)) . '<br>';
+echo 'Client Secret: ' . esc_html(var_dump($client_secret));
   $url = "https://us.battle.net/oauth/token";
   $params = ['grant_type'=>'client_credentials', 'scope' => 'wow.profile'];
   $curl = curl_init();
@@ -160,10 +165,4 @@ function fsdapikey_submit_api_key() {
     // Redirect to same page with status=1 to show our options updated banner
     wp_redirect($_SERVER['HTTP_REFERER'] . '&status=1');
 }
-// Output the values (for debugging purposes)
-echo 'Client ID: ' . esc_html($client_id) . '<br>';
-echo 'Client Secret: ' . esc_html($client_secret);
-echo 'Client ID: ' . esc_html(var_dump($client_id)) . '<br>';
-echo 'Client Secret: ' . esc_html(var_dump($client_secret));
-
 ?>
