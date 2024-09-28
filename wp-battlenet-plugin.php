@@ -160,4 +160,7 @@ function fsdapikey_submit_api_key() {
     // Redirect to same page with status=1 to show our options updated banner
     wp_redirect($_SERVER['HTTP_REFERER'] . '&status=1');
 }
+// Output the values (for debugging purposes)
+echo 'Client ID: ' . esc_html($client_id) . '<br>';
+echo 'Client Secret: ' . esc_html($client_secret);
 ?>
