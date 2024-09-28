@@ -12,7 +12,7 @@ $client_id = $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE optio
 $client_secret = $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_secret'");
 
 
-function token_call($client_id, $client_secret) {
+function token_call(string $client_id,string $client_secret) {
   $url = "https://us.battle.net/oauth/token";
   $params = ['grant_type'=>'client_credentials', 'scope' => 'wow.profile'];
   $curl = curl_init();
@@ -26,8 +26,8 @@ function token_call($client_id, $client_secret) {
   return json_decode($result)->access_token;
 }
 
-function blizzard_call_func($client_id, $client_secret) {
-  $access_token=token_call($client_id, $client_secret);
+function blizzard_call_func(string $client_id,string $client_secret) {
+  $access_token=token_call($client_id,$client_secret);
   $region = 'us';
   $namespace = 'dynamic-us';
   $locale = 'en_US';
@@ -49,11 +49,6 @@ add_shortcode('blizzard_call','blizzard_call_func');
 
 add_action('admin_menu', 'fsdapikey_register_my_api_keys_page');
 
-
-//add_shortcode('blizzard_call',function () use ($client_id, $client_secret) {
-  //var_dump($client_id, $client_secret);die;
-  //return blizzard_call_func($client_id, $client_secret);
-//});
 
 function fsdapikey_register_my_api_keys_page() {
   add_submenu_page(
