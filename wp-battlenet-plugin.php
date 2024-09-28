@@ -8,8 +8,19 @@
 
 global $wpdb;
 
-$client_id = unserialize($wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_id'"));
-$client_secret = unserialize($wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_secret'"));
+// Retrieve the client ID
+$client_id = get_option('our_client_id');
+
+// Retrieve the client secret
+$client_secret = get_option('our_client_secret');
+
+// If you need to decode from blob (if necessary)
+if (is_resource($client_id)) {
+    $client_id = stream_get_contents($client_id);
+}
+if (is_resource($client_secret)) {
+    $client_secret = stream_get_contents($client_secret);
+}
 
 
 function token_call(string $client_id,string $client_secret) {
