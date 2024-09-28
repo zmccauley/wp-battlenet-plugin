@@ -7,25 +7,25 @@
  */
 
 
-class credentials{
+class Credentials{
   
   private $client_id;
   private $client_secret;
   
-  public function set_id(){
+  public function __construct(){
     global $wpdb;
+
     $this -> client_id = get_option('our_client_id');
+    $this -> client_secret = get_option('our_client_secret');
+
     if (is_resource($this -> client_id)) {
       $this -> client_id = stream_get_contents($this -> client_id);
     }
-  }
-  public function set_secret(){
-    global $wpdb;
-    $this -> client_secret = get_option('our_client_secret');
     if (is_resource($this -> client_secret)) {
       $this -> client_secret = stream_get_contents($this -> client_secret);
     }
   }
+ 
   public function get_client_id(){
     return $this->client_id;
   }
@@ -51,7 +51,7 @@ function token_call($client_id,$client_secret) {
 }
 
 function blizzard_call_func() {
-  $my_creds = new credentials();
+  $my_creds = new Credentials();
   $client_id = $my_creds->get_client_id();
   $client_secret = $my_creds->get_client_secret();
   // Output the values (for debugging purposes)
