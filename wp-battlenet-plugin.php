@@ -52,6 +52,9 @@ function blizzard_call_func() {
   $my_creds = new credentials();
   $client_id = $my_creds->get_client_id();
   $client_secret = $my_creds->get_client_secret();
+  // Output the values (for debugging purposes)
+echo 'Client ID: ' . esc_html(var_dump($client_id)) . '<br>';
+echo 'Client Secret: ' . esc_html(var_dumb($client_secret));
   $access_token=token_call($client_id,$client_secret);
   $region = 'us';
   $namespace = 'dynamic-us';
