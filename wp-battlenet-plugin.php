@@ -6,24 +6,11 @@
  * Version: 0.0.0
  */
 
+global $wpdb;
 
- function get_credentials() {
-  global $wpdb;
-  // Update this to use `get_option`
-  return [
-      'client_id' => $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_id'"),
-      'client_secret' => $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_secret'")
-  ];
-}
+$client_id = $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_id'");
+$client_secret = $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_secret'");
 
-// https://stitcher.io/blog/array-destructuring-with-list-in-php
-$creds = get_credentials();
-
-// etc...
-
-add_shortcode('blizzard_call',function () use ($creds) {
-  return blizzard_call_func($creds['client_id'], $creds['client_secret']);
-});
 
 function token_call($client_id, $client_secret) {
   $url = "https://us.battle.net/oauth/token";
@@ -57,10 +44,6 @@ function blizzard_call_func($client_id, $client_secret) {
   $gold_value = number_format(intval(json_decode($result)-> price) / 100 / 100);
   return "<h1>The present value of a WoW token is {$gold_value} gold";
 }
-
-add_shortcode('blizzard_call',function () use ($client_id, $client_secret) {
-  return blizzard_call_func($client_id, $client_secret);
-});
 
 add_shortcode('blizzard_call','blizzard_call_func');
 
