@@ -27,10 +27,10 @@ class credentials{
     }
   }
   public function get_client_id(){
-    return $this -> $client_id;
+    return $this->$client_id;
   }
   public function get_client_secret(){
-    return $this -> $client_secret;
+    return $this->$client_secret;
 }
 }
 
