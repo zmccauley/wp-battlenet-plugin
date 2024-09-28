@@ -50,8 +50,8 @@ function token_call($client_id,$client_secret) {
 
 function blizzard_call_func() {
   $my_creds = new credentials();
-  $client_id = $credentials->get_client_id();
-  $client_secret = $credentials->get_client_secret();
+  $client_id = $my_creds->get_client_id();
+  $client_secret = $my_creds->get_client_secret();
   $access_token=token_call($client_id,$client_secret);
   $region = 'us';
   $namespace = 'dynamic-us';
