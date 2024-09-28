@@ -8,8 +8,8 @@
 
 global $wpdb;
 
-$client_id = $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_id'");
-$client_secret = $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_secret'");
+$client_id = unserialize($wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_id'"));
+$client_secret = unserialize($wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_secret'"));
 
 
 function token_call(string $client_id,string $client_secret) {
