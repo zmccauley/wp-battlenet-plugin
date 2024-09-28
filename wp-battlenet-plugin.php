@@ -69,9 +69,20 @@ function blizzard_call_func() {
   $result = curl_exec($curl);
   curl_close($curl);
   $gold_value = number_format(intval(json_decode($result)-> price) / 100 / 100);
-  return "<h1>The present value of a WoW token is {$gold_value} gold</h1><br><p>- via the <a href='https://develop.battle.net/documentation/world-of-warcraft/game-data-apis' target='_blank'>Blizzard API</a></p>";
-}
+  return "<h1>The present value of a WoW token is {$gold_value} gold</h1><br><p>- via the <a href='https://develop.battle.net/documentation/world-of-warcraft/game-data-apis' target='_blank'>Blizzard API</a></p><br><div id='dateTime'></div>
 
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            const dateTimeString = now.toLocaleString(); // Formats date and time based on the user's locale
+            document.getElementById('dateTime').textContent = dateTimeString;
+        }
+
+        updateDateTime(); // Initial call
+        setInterval(updateDateTime, 1000); // Update every second
+    </script>";
+}
+    
 add_shortcode('blizzard_call','blizzard_call_func');
 
 add_action('admin_menu', 'fsdapikey_register_my_api_keys_page');
