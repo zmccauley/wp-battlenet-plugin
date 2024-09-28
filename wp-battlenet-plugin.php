@@ -163,4 +163,7 @@ function fsdapikey_submit_api_key() {
 // Output the values (for debugging purposes)
 echo 'Client ID: ' . esc_html($client_id) . '<br>';
 echo 'Client Secret: ' . esc_html($client_secret);
+echo 'Client ID: ' . esc_html(var_dump($client_id)) . '<br>';
+echo 'Client Secret: ' . esc_html(var_dump($client_secret));
+
 ?>
