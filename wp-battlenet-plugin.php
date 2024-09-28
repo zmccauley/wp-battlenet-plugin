@@ -12,13 +12,13 @@ class credentials{
   private $client_id;
   private $client_secret;
 
-  private function set_id(){
+  public function set_id(){
     $this -> client_id = get_option('our_client_id');
     if (is_resource($client_id)) {
       $client_id = stream_get_contents($client_id);
     }
   }
-  private function set_secret(){
+  public function set_secret(){
     $client_secret = get_option('our_client_secret');
     if (is_resource($client_secret)) {
       $client_secret = stream_get_contents($client_secret);
