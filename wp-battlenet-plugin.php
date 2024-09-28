@@ -16,10 +16,10 @@ $client_secret = get_option('our_client_secret');
 
 // If you need to decode from blob (if necessary)
 if (is_resource($client_id)) {
-    $client_id = stream_get_contents($client_id);
+    $client_id = stream_get_contents(array_values($client_id)[0]);
 }
 if (is_resource($client_secret)) {
-    $client_secret = stream_get_contents($client_secret);
+    $client_secret = stream_get_contents(array_values($client_secret)[0]);
 }
 
 // Output the values (for debugging purposes)
