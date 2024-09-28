@@ -15,22 +15,22 @@ class credentials{
   public function set_id(){
     global $wpdb;
     $this -> client_id = get_option('our_client_id');
-    if (is_resource($this -> $client_id)) {
-      $this -> $client_id = stream_get_contents($this -> $client_id);
+    if (is_resource($this -> client_id)) {
+      $this -> client_id = stream_get_contents($this -> client_id);
     }
   }
   public function set_secret(){
     global $wpdb;
-    $this -> $client_secret = get_option('our_client_secret');
-    if (is_resource($this -> $client_secret)) {
-      $this -> $client_secret = stream_get_contents($this -> $client_secret);
+    $this -> client_secret = get_option('our_client_secret');
+    if (is_resource($this -> client_secret)) {
+      $this -> client_secret = stream_get_contents($this -> client_secret);
     }
   }
   public function get_client_id(){
-    return $this->$client_id;
+    return $this->client_id;
   }
   public function get_client_secret(){
-    return $this->$client_secret;
+    return $this->client_secret;
 }
 }
 
