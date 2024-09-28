@@ -26,7 +26,7 @@ if (is_resource($client_secret)) {
 echo 'Client ID: ' . esc_html($client_id) . '<br>';
 echo 'Client Secret: ' . esc_html($client_secret);
 
-function token_call(string $client_id,string $client_secret) {
+function token_call($client_id,$client_secret) {
   $url = "https://us.battle.net/oauth/token";
   $params = ['grant_type'=>'client_credentials', 'scope' => 'wow.profile'];
   $curl = curl_init();
@@ -40,7 +40,7 @@ function token_call(string $client_id,string $client_secret) {
   return json_decode($result)->access_token;
 }
 
-function blizzard_call_func(string $client_id,string $client_secret) {
+function blizzard_call_func($client_id,$client_secret) {
   $access_token=token_call($client_id,$client_secret);
   $region = 'us';
   $namespace = 'dynamic-us';
