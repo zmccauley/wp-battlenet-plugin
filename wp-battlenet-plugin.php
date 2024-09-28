@@ -9,15 +9,21 @@
 
  function get_credentials() {
   global $wpdb;
-  // Return an indexed array
+  // Update this to use `get_option`
   return [
-      $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_id'"),
-      $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_secret'")
+      'client_id' => $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_id'"),
+      'client_secret' => $wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE option_name = 'our_client_secret'")
   ];
 }
 
-// Destructure the indexed array
-[$client_id, $client_secret] = get_credentials();
+// https://stitcher.io/blog/array-destructuring-with-list-in-php
+$creds = get_credentials();
+
+// etc...
+
+add_shortcode('blizzard_call',function () use ($creds) {
+  return blizzard_call_func($creds['client_id'], $creds['client_secret']);
+});
 
 function token_call($client_id, $client_secret) {
   $url = "https://us.battle.net/oauth/token";
