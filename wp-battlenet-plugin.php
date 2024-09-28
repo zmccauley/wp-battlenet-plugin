@@ -69,7 +69,7 @@ function blizzard_call_func() {
   $result = curl_exec($curl);
   curl_close($curl);
   $gold_value = number_format(intval(json_decode($result)-> price) / 100 / 100);
-  return "<h1>The present value of a WoW token is {$gold_value} gold</h1><p> via the <a href='https://develop.battle.net/documentation/world-of-warcraft/game-data-apis'>Blizzard API</a></p>";
+  return "<h1>The present value of a WoW token is {$gold_value} gold</h1><br><p>- via the <a href='https://develop.battle.net/documentation/world-of-warcraft/game-data-apis' target='_blank'>Blizzard API</a></p>";
 }
 
 add_shortcode('blizzard_call','blizzard_call_func');
