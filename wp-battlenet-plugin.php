@@ -38,7 +38,7 @@ function token_call(string $client_id,string $client_secret) {
   return json_decode($result)->access_token;
 }
 
-function blizzard_call_func(string $client_id,string $client_secret) {
+function blizzard_call_func() {
   $access_token=token_call($client_id,$client_secret);
   $region = 'us';
   $namespace = 'dynamic-us';
