@@ -16,15 +16,15 @@ $client_secret = get_option('our_client_secret');
 
 // If you need to decode from blob (if necessary)
 if (is_resource($client_id)) {
-    $client_id = stream_get_contents(array_values($client_id)[0]);
+    $client_id = stream_get_contents($client_id);
 }
 if (is_resource($client_secret)) {
-    $client_secret = stream_get_contents(array_values($client_secret)[0]);
+    $client_secret = stream_get_contents($client_secret);
 }
 
 // Output the values (for debugging purposes)
-echo 'Client ID: ' . esc_html($client_id) . '<br>';
-echo 'Client Secret: ' . esc_html($client_secret);
+echo 'Client ID: ' . esc_html(var_dump($client_id)) . '<br>';
+echo 'Client Secret: ' . esc_html(var_dump($client_secret));
 
 function token_call($client_id,$client_secret) {
   $url = "https://us.battle.net/oauth/token";
@@ -40,7 +40,7 @@ function token_call($client_id,$client_secret) {
   return json_decode($result)->access_token;
 }
 
-function blizzard_call_func($client_id,$client_secret) {
+function blizzard_call_func($client_id,string $client_secret) {
   $access_token=token_call($client_id,$client_secret);
   $region = 'us';
   $namespace = 'dynamic-us';
