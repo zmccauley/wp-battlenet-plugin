@@ -5,20 +5,22 @@
  * Description: A plugin that provides shortcodes for Battle.net API
  * Version: 0.0.0
  */
-global $wpdb;
+
 
 class credentials{
   
   private $client_id;
   private $client_secret;
-
+  
   public function set_id(){
+    global $wpdb;
     $this -> client_id = get_option('our_client_id');
     if (is_resource($client_id)) {
       $client_id = stream_get_contents($client_id);
     }
   }
   public function set_secret(){
+    global $wpdb;
     $client_secret = get_option('our_client_secret');
     if (is_resource($client_secret)) {
       $client_secret = stream_get_contents($client_secret);
