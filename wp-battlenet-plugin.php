@@ -114,7 +114,7 @@ function blizzard_api_affixes() {
   }
 }
   
-return $result;
+return display_affixes();
 }
   
 
