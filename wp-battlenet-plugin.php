@@ -110,16 +110,7 @@ function blizzard_api_affixes() {
   
   
 
-return "<h1> Hover its icon to learn what an Affix does! </h1><br><div id='affixList'></div>
-
-  <script>
-    function affixes(){
-      result.affixes.forEach(affix => {
-    console.log('Affix Name: ' + affix.name);
-});
-    }
-    affixes();
-  </script>";
+return $result;
 }
   
 
