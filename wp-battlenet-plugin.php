@@ -71,7 +71,8 @@ function blizzard_api_token_cost() {
   $result = curl_exec($curl);
   curl_close($curl);
   $gold_value = number_format(intval(json_decode($result)-> price) / 100 / 100);
-  return "<h1>The present value of a WoW token is {$gold_value} gold</h1><br><p>- via the <a href='https://develop.battle.net/documentation/world-of-warcraft/game-data-apis' target='_blank'>Blizzard API</a></p><br><div id='dateTime'></div>
+  return "<h1>The present value of a WoW token is {$gold_value} gold</h1><br><p>- via the <a href='https://develop.battle.net/documentation/world-of-warcraft/game-data-apis' 
+  target='_blank'>Blizzard API</a></p><br><div id='dateTime'></div>
 
     <script>
         function updateDateTime() {
@@ -107,10 +108,19 @@ function blizzard_api_affixes() {
   $result = json_decode(curl_exec($curl),true);
   curl_close($curl);
   
-  foreach ($result['affixes'] as $affix) {
-    return "Affix Name: " . $affix['name'] . ", ID: " . $affix['id'] . "\n";
-}
   
+}
+return '<h1> Hover its icon to learn what an Affix does! </h1><br><div id="affixList"></div>
+
+  <script>
+    function affixes(){
+      result.affixes.forEach(affix => {
+    console.log("Affix Name: " + affix.name);
+});
+    }
+    affixes();
+  </script>
+
   
 }
     
