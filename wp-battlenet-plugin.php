@@ -34,8 +34,8 @@ class Credentials{
   public function get_client_secret(){
     return $this->client_secret;
 }
-public function get_access_token_data(){
-  return $this->access_token_data;
+  public function get_access_token_data(){
+    return $this->access_token_data;
 }
 private function set_access_token_data() {
     $url = "https://us.battle.net/oauth/token";
