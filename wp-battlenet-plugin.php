@@ -18,7 +18,7 @@ class Credentials{
 
     $this -> client_id = get_option('our_client_id');
     $this -> client_secret = get_option('our_client_secret');
-    $this -> access_token_data = set_access_token_data();
+    $this -> access_token_data = $this -> set_access_token_data();
 
     if (is_resource($this -> client_id)) {
       $this -> client_id = stream_get_contents($this -> client_id);
