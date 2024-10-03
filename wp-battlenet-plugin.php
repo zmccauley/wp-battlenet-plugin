@@ -104,9 +104,10 @@ function blizzard_api_affixes() {
   curl_setopt($curl, CURLOPT_URL, $url);
   curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-  $result = json_decode(curl_exec($curl));
+  $result = curl_exec($curl);
   curl_close($curl);
-  return var_dump($result);
+  return $result;
+  
 }
     
 add_shortcode('affix_index','blizzard_api_affixes');
