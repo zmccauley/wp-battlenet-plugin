@@ -104,7 +104,7 @@ function blizzard_api_affixes() {
   curl_setopt($curl, CURLOPT_URL, $url);
   curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-  $result = curl_exec($curl);
+  $result = json_decode(curl_exec($curl));
   curl_close($curl);
   var_dump($result);
 }
