@@ -58,9 +58,9 @@ function add_new_shortcodes(){
 
 function blizzard_api_token_cost() {
   $my_creds = new Credentials();
-  $client_id = $my_creds->get_client_id();
-  $client_secret = $my_creds->get_client_secret();
-  $access_token= $my_creds->get_token_access_data();
+  $client_id = $my_creds -> get_client_id();
+  $client_secret = $my_creds -> get_client_secret();
+  $access_token = $my_creds -> get_access_token_data();
   $region = 'us';
   $namespace = 'dynamic-us';
   $locale = 'en_US';
