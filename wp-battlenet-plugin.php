@@ -13,7 +13,7 @@ class Credentials{
   private $client_secret;
   private $access_token_data;
   
-  private function set_access_token_data() {
+  function set_access_token_data() {
     $url = "https://us.battle.net/oauth/token";
     $params = ['grant_type'=>'client_credentials', 'scope' => 'wow.profile'];
     $curl = curl_init();
