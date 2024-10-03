@@ -87,8 +87,34 @@ function blizzard_api_token_cost() {
     
 add_shortcode('token_cost','blizzard_api_token_cost');
 
-add_action('admin_menu', 'fsdapikey_register_my_api_keys_page');
+//
+function blizzard_api_affixes() {
+  $my_creds = new Credentials();
+  $client_id = $my_creds -> get_client_id();
+  $client_secret = $my_creds -> get_client_secret();
+  $access_token = $my_creds -> get_access_token_data();
+  $region = 'us';
+  $namespace = 'static-us';
+  $locale = 'en_US';
+  $url="https://{$region}.api.blizzard.com/data/wow/keystone-affix/index?namespace={$namespace}&locale={$locale}";
+  $headers = [
+      "Authorization: Bearer " . $access_token
+  ];
+  $curl=curl_init();
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  $result = curl_exec($curl);
+  curl_close($curl);
+  var_dump($result);
+}
+    
+add_shortcode('affix_index','blizzard_api_affixes');
+//
 
+
+// Admin menu for storing client id/secret to wp db
+add_action('admin_menu', 'fsdapikey_register_my_api_keys_page');
 
 function fsdapikey_register_my_api_keys_page() {
   add_submenu_page(
