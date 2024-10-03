@@ -11,12 +11,14 @@ class Credentials{
   
   private $client_id;
   private $client_secret;
+  private $access_token_data;
   
   public function __construct(){
     global $wpdb;
 
     $this -> client_id = get_option('our_client_id');
     $this -> client_secret = get_option('our_client_secret');
+    $this -> access_token_data = set_access_token_data();
 
     if (is_resource($this -> client_id)) {
       $this -> client_id = stream_get_contents($this -> client_id);
@@ -32,29 +34,33 @@ class Credentials{
   public function get_client_secret(){
     return $this->client_secret;
 }
+public function get_access_token_data(){
+  return $this->access_token_data;
+}
+private function set_access_token_data() {
+    $url = "https://us.battle.net/oauth/token";
+    $params = ['grant_type'=>'client_credentials', 'scope' => 'wow.profile'];
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_POST, true);
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+    curl_setopt($curl, CURLOPT_USERPWD, $this -> client_id.':'.$this -> client_secret);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    $result = curl_exec($curl);
+    curl_close($curl);
+    return json_decode($result)->access_token;
+  }
 }
 
+function add_new_shortcodes(){
 
-function token_call($client_id,$client_secret) {
-
-  $url = "https://us.battle.net/oauth/token";
-  $params = ['grant_type'=>'client_credentials', 'scope' => 'wow.profile'];
-  $curl = curl_init();
-  curl_setopt($curl, CURLOPT_POST, true);
-  curl_setopt($curl, CURLOPT_URL, $url);
-  curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
-  curl_setopt($curl, CURLOPT_USERPWD, $client_id.':'.$client_secret);
-  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-  $result = curl_exec($curl);
-  curl_close($curl);
-  return json_decode($result)->access_token;
 }
 
-function blizzard_call_func() {
+function blizzard_api_token_cost() {
   $my_creds = new Credentials();
   $client_id = $my_creds->get_client_id();
   $client_secret = $my_creds->get_client_secret();
-  $access_token=token_call($client_id,$client_secret);
+  $access_token= $my_creds->get_token_access_data();
   $region = 'us';
   $namespace = 'dynamic-us';
   $locale = 'en_US';
@@ -83,7 +89,7 @@ function blizzard_call_func() {
     </script>";
 }
     
-add_shortcode('blizzard_call','blizzard_call_func');
+add_shortcode('token_cost','blizzard_api_token_cost');
 
 add_action('admin_menu', 'fsdapikey_register_my_api_keys_page');
 
