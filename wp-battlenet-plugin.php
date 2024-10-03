@@ -104,9 +104,12 @@ function blizzard_api_affixes() {
   curl_setopt($curl, CURLOPT_URL, $url);
   curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-  $result = curl_exec($curl);
+  $result = json_parse(curl_exec($curl));
   curl_close($curl);
-  echo $result;
+  
+  foreach ($result['affixes'] as $affix) {
+    echo "Affix Name: " . $affix['name'] . ", ID: " . $affix['id'] . "\n";
+}
   return;
   
 }
