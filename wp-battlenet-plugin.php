@@ -109,7 +109,7 @@ function blizzard_api_affixes() {
   curl_close($curl);
   
   
-}
+
 return "<h1> Hover its icon to learn what an Affix does! </h1><br><div id='affixList'></div>
 
   <script>
@@ -120,7 +120,7 @@ return "<h1> Hover its icon to learn what an Affix does! </h1><br><div id='affix
     }
     affixes();
   </script>";
-
+}
   
 
     
