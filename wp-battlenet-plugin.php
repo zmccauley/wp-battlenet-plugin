@@ -108,9 +108,9 @@ function blizzard_api_affixes() {
   curl_close($curl);
   
   foreach ($result['affixes'] as $affix) {
-    echo "Affix Name: " . $affix['name'] . ", ID: " . $affix['id'] . "\n";
+    return "Affix Name: " . $affix['name'] . ", ID: " . $affix['id'] . "\n";
 }
-  return;
+  
   
 }
     
