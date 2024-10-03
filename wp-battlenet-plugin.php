@@ -13,6 +13,20 @@ class Credentials{
   private $client_secret;
   private $access_token_data;
   
+  private function set_access_token_data() {
+    $url = "https://us.battle.net/oauth/token";
+    $params = ['grant_type'=>'client_credentials', 'scope' => 'wow.profile'];
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_POST, true);
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+    curl_setopt($curl, CURLOPT_USERPWD, $this -> client_id.':'.$this -> client_secret);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    $result = curl_exec($curl);
+    curl_close($curl);
+    return json_decode($result)->access_token;
+  }
+
   public function __construct(){
     global $wpdb;
 
@@ -37,19 +51,7 @@ class Credentials{
 public function get_access_token_data(){
   return $this->access_token_data;
 }
-private function set_access_token_data() {
-    $url = "https://us.battle.net/oauth/token";
-    $params = ['grant_type'=>'client_credentials', 'scope' => 'wow.profile'];
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_POST, true);
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
-    curl_setopt($curl, CURLOPT_USERPWD, $this -> client_id.':'.$this -> client_secret);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    $result = curl_exec($curl);
-    curl_close($curl);
-    return json_decode($result)->access_token;
-  }
+
 }
 
 function add_new_shortcodes(){
