@@ -108,13 +108,16 @@ function blizzard_api_affixes() {
   $result = json_decode(curl_exec($curl),true);
   curl_close($curl);
   
-  function display_affixes(){
+  function display_affixes($result){
+    $affixes_formatted = '';
     foreach ($result['affixes'] as $affix) {
-      echo "Affix Name: " . $affix['name'] . "\n";
-  }
+      $affixes_formatted .= "Affix Name: " . $affix['name'] . "\n";
+      
+  };
+  return $affixes_formatted;
 }
   
-return display_affixes();
+return display_affixes($result);
 }
   
 
