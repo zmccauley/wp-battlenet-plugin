@@ -110,14 +110,36 @@ function blizzard_api_affixes() {
   
   function display_affixes($result){
     $affixes_formatted = '';
+    $id_no = 0;
     foreach ($result['affixes'] as $affix) {
-      $affixes_formatted .= "<div> Affix Name: " . $affix['name'] . "</div>";
+      $id_no += 1;
+      $id_no_str = strval($id_no);
+      $affixes_formatted .= "<div id='{$id_no_str}'> Affix Name: " . $affix['name'] . "</div>";
       
   };
   return $affixes_formatted;
 }
   
-return display_affixes($result);
+return display_affixes($result) . '<script>
+    function getId(){
+        document.addEventListener("mouseover", function(event)) {
+            const hoveredElement = event.target; // Get the element under the cursor
+            const elementId = hoveredElement.id; // Get the ID of the element
+            };
+            return elementId;
+    }
+    
+    const myDiv = document.getElementById(getId());
+    const hoverText = document.getElementById(getId());
+
+    myDiv.addEventListener("mouseover", () => {
+      hoverText.style.display = "block";
+    });
+
+    myDiv.addEventListener("mouseout", () => {
+      hoverText.style.display = "none";
+    });
+    </script>';
 }
   
 
