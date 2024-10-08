@@ -199,7 +199,7 @@ return "<div class='hover-text' id='hoverText'></div>" . display_affixes($result
             hoverText.textContent = target.getAttribute('data-text'); // Set the hover text
             hoverText.style.display = 'block'; // Show text on hover
             const rect = target.getBoundingClientRect();
-            hoverText.style.top = (rect.bottom + window.scrollY) + 'px';
+            hoverText.style.top = rect.bottom + window.scrollY + 'px';
             hoverText.style.left = rect.left + 'px';
 
         });
