@@ -168,8 +168,6 @@ function blizzard_api_affixes() {
   $result = json_decode(curl_exec($curl),true);
   curl_close($curl);
 
-
-  var_dump($result);
 return display_affixes($result,$my_creds) . "<script>
     const hoverTargets = document.querySelectorAll('.hover-target');
     const hoverText = document.getElementById('hoverText');
