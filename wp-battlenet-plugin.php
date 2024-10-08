@@ -199,8 +199,6 @@ return display_affixes($result,$my_creds) . "
             hoverText.textContent = target.getAttribute('data-text'); // Set the hover text
             hoverText.style.display = 'block'; // Show text on hover
             const rect = target.getBoundingClientRect();
-            hoverText.style.top = `${rect.bottom + window.scrollY}px`; // Position below the hovered element
-            hoverText.style.left = `${rect.left}px`; // Align with the left of the hovered element
         });
 
         target.addEventListener('mouseleave', () => {
