@@ -88,10 +88,9 @@ function blizzard_api_token_cost() {
     
 add_shortcode('token_cost','blizzard_api_token_cost');
 
-function display_affixes($result){
+function display_affixes($result,$my_creds){
   $affixes_formatted = '';
   foreach ($result['affixes'] as $index => $affix) {
-    $my_creds = new Credentials();
     $client_id = $my_creds -> get_client_id();
     $client_secret = $my_creds -> get_client_secret();
     $access_token = $my_creds -> get_access_token_data();
@@ -137,7 +136,7 @@ function blizzard_api_affixes() {
 
 
   var_dump($result);
-return display_affixes($result) . '<script>
+return display_affixes($result,$my_creds) . '<script>
     function getId(){
         document.addEventListener("mouseover", function(event)) {
             const hoveredElement = event.target; // Get the element under the cursor
