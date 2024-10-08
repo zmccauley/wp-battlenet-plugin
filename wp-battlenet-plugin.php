@@ -168,7 +168,29 @@ function blizzard_api_affixes() {
   $result = json_decode(curl_exec($curl),true);
   curl_close($curl);
 
-return display_affixes($result,$my_creds) . "<script>
+return display_affixes($result,$my_creds) . "
+<style>
+        .hover-target {
+            display: inline-block;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            margin: 5px; /* Add some space between elements */
+        }
+
+        .hover-text {
+            display: none; /* Initially hide the hover text */
+            position: absolute; /* Position it relative to the document */
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin-top: 5px;
+            z-index: 10;
+        }
+    </style>
+
+<script>
     const hoverTargets = document.querySelectorAll('.hover-target');
     const hoverText = document.getElementById('hoverText');
 
