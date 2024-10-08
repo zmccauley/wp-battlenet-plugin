@@ -91,7 +91,21 @@ add_shortcode('token_cost','blizzard_api_token_cost');
 function display_affixes($result){
   $affixes_formatted = '';
   foreach ($result['affixes'] as $index => $affix) {
-    $affixes_formatted .= "<div id='" . ($index + 1) . "'> Affix Name: " . $affix['name'] . implode($affix['key']) . "</div>";
+    $region = 'us';
+    $namespace = 'static-us';
+    $locale = 'en_US';
+    $url="https://{$region}.api.blizzard.com/data/wow/keystone-affix/{$affix['id']}?namespace={$namespace}&locale={$locale}";
+    $headers = [
+        "Authorization: Bearer " . $access_token
+    ];
+    $curl=curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    $affix_description = json_decode(curl_exec($curl),true);
+    curl_close($curl);
+
+    $affixes_formatted .= "<div id='" . ($index + 1) . "'> Affix Name: " . $affix['name'] . $affix_description . "</div>";
 
       
 };
@@ -116,6 +130,8 @@ function blizzard_api_affixes() {
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
   $result = json_decode(curl_exec($curl),true);
   curl_close($curl);
+
+
   var_dump($result);
 return display_affixes($result) . '<script>
     function getId(){
