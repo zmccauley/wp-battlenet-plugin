@@ -168,7 +168,7 @@ function blizzard_api_affixes() {
   $result = json_decode(curl_exec($curl),true);
   curl_close($curl);
 
-return display_affixes($result,$my_creds) . "
+return display_affixes($result,$my_creds) . "<div class='hover-text' id='hoverText'></div>" . "
 <style>
         .hover-target {
             display: inline-block;
@@ -207,7 +207,7 @@ return display_affixes($result,$my_creds) . "
             hoverText.style.display = 'none'; // Hide text when not hovering
         });
     });
-</script>" . "<div class='hover-text' id='hoverText'></div>";
+</script>";
 };
     
 add_shortcode('affix_index','blizzard_api_affixes');
