@@ -140,7 +140,8 @@ function display_affixes($result,$my_creds){
     $affix_description = json_decode(curl_exec($curl),true);
     curl_close($curl);
 
-    $affixes_formatted .= "<div style='display:block;' class='hover-target' data-text='{$affix_description['description']}'>" . $affix['name'] ."</div>\n"
+    $affixes_formatted .= "<div style='display:block;' class='hover-target' data-text='" . $affix_description['description'] . "'>" . $affix['name'] . "</div>\n";
+
     ;
 
       
