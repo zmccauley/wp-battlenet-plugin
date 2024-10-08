@@ -108,6 +108,7 @@ function display_affixes($result,$my_creds){
     $affix_description = json_decode(curl_exec($curl),true);
     curl_close($curl);
 
+    var_dump($affix_description);
     $affixes_formatted .= "<div id='" . ($index + 1) . "'> Affix Name: " . $affix['name'] . "\n Description:" . $affix_description . "</div>";
 
       
