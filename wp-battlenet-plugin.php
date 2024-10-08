@@ -117,8 +117,6 @@ function display_affixes($result){
   };
     return $affixes_formatted;
   }
-
-  return $affixes_formatted;
 }
   
 return display_affixes($result) . '<script>
