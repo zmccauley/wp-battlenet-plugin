@@ -140,7 +140,7 @@ function display_affixes($result,$my_creds){
     $affix_description = json_decode(curl_exec($curl),true);
     curl_close($curl);
 
-    $affixes_formatted .= "<div style='display:block;' class='hover-target' data-text='" . $affix_description['description'] . "'>" . $affix['name'] . "</div>\n";
+    $affixes_formatted .= "<div style='display:block;' class='hover-target' data-text='" . $affix_description['description'] . "'>" . $affix['name'] . "</div>\n" . "<div class='hover-text' id='hoverText'></div>";
 
     ;
 
@@ -168,7 +168,7 @@ function blizzard_api_affixes() {
   $result = json_decode(curl_exec($curl),true);
   curl_close($curl);
 
-return display_affixes($result,$my_creds) . "<div class='hover-text' id='hoverText'></div>" . "
+return display_affixes($result,$my_creds) . "
 <style>
         .hover-target {
             display: inline-block;
