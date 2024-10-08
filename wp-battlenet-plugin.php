@@ -140,9 +140,8 @@ function display_affixes($result,$my_creds){
     $affix_description = json_decode(curl_exec($curl),true);
     curl_close($curl);
 
-    $affixes_formatted .= "<div class='hover-target' data-text='{$affix_description['description']}'>" . $affix['name'] ."</div>" .
-    "<div class='hover-text' id='hoverText'></div>
-    ";
+    $affixes_formatted .= "<div style='display:block;' class='hover-target' data-text='{$affix_description['description']}'>" . $affix['name'] ."</div>"
+    ;
 
       
 };
@@ -207,7 +206,7 @@ return display_affixes($result,$my_creds) . "
             hoverText.style.display = 'none'; // Hide text when not hovering
         });
     });
-</script>";
+</script>" . "<div class='hover-text' id='hoverText'></div>";
 };
     
 add_shortcode('affix_index','blizzard_api_affixes');
