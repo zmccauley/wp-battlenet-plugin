@@ -116,7 +116,7 @@ function blizzard_api_affixes() {
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
   $result = json_decode(curl_exec($curl),true);
   curl_close($curl);
-  var_dump($result);
+  var_dump($result . '<br>');
 return display_affixes($result) . '<script>
     function getId(){
         document.addEventListener("mouseover", function(event)) {
