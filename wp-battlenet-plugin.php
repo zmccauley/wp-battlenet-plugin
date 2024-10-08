@@ -168,7 +168,7 @@ function blizzard_api_affixes() {
   $result = json_decode(curl_exec($curl),true);
   curl_close($curl);
 
-return display_affixes($result,$my_creds) . "<div class='hover-text' id='hoverText'></div>" . "
+return "<div class='hover-text' id='hoverText'></div>" . display_affixes($result,$my_creds) .  "
 <style>
         .hover-target {
             display: inline-block;
@@ -199,7 +199,7 @@ return display_affixes($result,$my_creds) . "<div class='hover-text' id='hoverTe
             hoverText.textContent = target.getAttribute('data-text'); // Set the hover text
             hoverText.style.display = 'block'; // Show text on hover
             const rect = target.getBoundingClientRect();
-            hoverText.style.top = `{rect.bottom + window.scrollY}px`; // Position below the hovered element 
+            hoverText.style.top = `${rect.bottom + window.scrollY}px`; // Position below the hovered element 
             hoverText.style.left = `{rect.left}px`; // Align with the left of the hovered element
         });
 
