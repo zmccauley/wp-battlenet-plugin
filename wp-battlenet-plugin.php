@@ -111,7 +111,8 @@ function blizzard_api_affixes() {
 function display_affixes($result){
     $affixes_formatted = '';
     foreach ($result['affixes'] as $index => $affix) {
-       $affixes_formatted .= "<div id='{$index + 1}'> Affix Name: " . $affix['name'] . "</div>";
+      $affixes_formatted .= "<div id='" . ($index + 1) . "'> Affix Name: " . $affix['name'] . "</div>";
+
         
   };
     return $affixes_formatted;
