@@ -91,7 +91,7 @@ add_shortcode('token_cost','blizzard_api_token_cost');
 function display_affixes($result){
   $affixes_formatted = '';
   foreach ($result['affixes'] as $index => $affix) {
-    $affixes_formatted .= "<div id='" . ($index + 1) . "'> Affix Name: " . $affix['name'] . $affix['key'] . "</div>";
+    $affixes_formatted .= "<div id='" . ($index + 1) . "'> Affix Name: " . $affix['name'] . implode($affix['key']) . "</div>";
 
       
 };
