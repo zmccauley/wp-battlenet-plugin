@@ -137,7 +137,7 @@ function blizzard_api_affixes() {
 
 
   var_dump($result);
-return display_affixes($result,$my_creds) . '<script>
+return display_affixes($result,$my_creds) . "id = getId() '"'<script>
     function getId(){
         document.addEventListener("mouseover", function(event)) {
             const hoveredElement = event.target; // Get the element under the cursor
