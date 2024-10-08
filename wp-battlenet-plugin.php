@@ -52,6 +52,37 @@ private function set_access_token_data() {
   }
 }
 
+class Affix{
+  
+  private $affix_name;
+  private $affix_id;
+  private $affix_description;
+  private $affix_media;
+  
+  public function __construct($affix_name,$affix_id,$affix_description,$affix_media){
+    $this-> affix_name = $affix_name;
+    $this-> affix_id = $affix_id;
+    $this-> affix_description = $affix_description;
+    $this-> affix_media = $affix_media;
+  }
+ 
+  public function get_affix_name(){
+    return $this->affix_name;
+  }
+
+  public function get_affix_id(){
+    return $this->affix_id;
+  }
+
+  public function get_affix_description(){
+    return $this->affix_description;
+  }
+
+  public function get_affix_media(){
+    return $this->affix_media;
+  }
+}
+
 function blizzard_api_token_cost() {
   $my_creds = new Credentials();
   $client_id = $my_creds -> get_client_id();
@@ -89,7 +120,7 @@ function blizzard_api_token_cost() {
 add_shortcode('token_cost','blizzard_api_token_cost');
 
 function display_affixes($result,$my_creds){
-  $affixes_formatted = '';
+  $affixes_formatted = [];
   foreach ($result['affixes'] as $index => $affix) {
     $client_id = $my_creds -> get_client_id();
     $client_secret = $my_creds -> get_client_secret();
@@ -108,8 +139,7 @@ function display_affixes($result,$my_creds){
     $affix_description = json_decode(curl_exec($curl),true);
     curl_close($curl);
 
-    var_dump($affix_description);
-    $affixes_formatted .= "<div id='" . ($index + 1) . "'> Affix Name: " . $affix['name'] . "\n Description:" . $affix_description['description'] . "</div>";
+    $affixes_formatted .= new Affix($affix['name'],$affix['id'],$affix_description['description'],null);
 
       
 };
@@ -137,7 +167,7 @@ function blizzard_api_affixes() {
 
 
   var_dump($result);
-return display_affixes($result,$my_creds) . '<div>getId(); </div>' . '<script>
+return display_affixes($result,$my_creds) . '<script>
     function getId(){
         document.addEventListener("mouseover", function(event)) {
             const hoveredElement = event.target; // Get the element under the cursor
