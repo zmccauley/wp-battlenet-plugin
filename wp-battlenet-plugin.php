@@ -172,9 +172,6 @@ return "<div class='hover-text' id='hoverText'></div>" . display_affixes($result
 <style>
         .hover-target {
             display: inline-block;
-            padding: 10px;
-            background-color: #007BFF;
-            color: white;
             cursor: pointer;
             margin: 5px; /* Add some space between elements */
         }
