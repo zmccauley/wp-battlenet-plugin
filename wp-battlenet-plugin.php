@@ -141,8 +141,6 @@ return display_affixes($result) . '<script>
       hoverText.style.display = "none";
     });
     </script>';
-}
-  
 
     
 add_shortcode('affix_index','blizzard_api_affixes');
