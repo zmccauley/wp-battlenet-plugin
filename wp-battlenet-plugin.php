@@ -117,8 +117,7 @@ function display_affixes($result){
   };
     return $affixes_formatted;
   }
-}
-  
+
 return display_affixes($result) . '<script>
     function getId(){
         document.addEventListener("mouseover", function(event)) {
@@ -139,7 +138,7 @@ return display_affixes($result) . '<script>
       hoverText.style.display = "none";
     });
     </script>';
-
+};
     
 add_shortcode('affix_index','blizzard_api_affixes');
 //
