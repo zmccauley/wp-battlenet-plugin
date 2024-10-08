@@ -51,7 +51,7 @@ private function set_access_token_data() {
     return json_decode($result)->access_token;
   }
 }
-
+// Deprecated class: Affix
 class Affix{
   
   private $affix_name;
@@ -81,6 +81,7 @@ class Affix{
   public function get_affix_media(){
     return $this->affix_media;
   }
+
 }
 
 function blizzard_api_token_cost() {
@@ -120,7 +121,7 @@ function blizzard_api_token_cost() {
 add_shortcode('token_cost','blizzard_api_token_cost');
 
 function display_affixes($result,$my_creds){
-  $affixes_formatted = [];
+  $affixes_formatted = '';
   foreach ($result['affixes'] as $index => $affix) {
     $client_id = $my_creds -> get_client_id();
     $client_secret = $my_creds -> get_client_secret();
@@ -139,7 +140,9 @@ function display_affixes($result,$my_creds){
     $affix_description = json_decode(curl_exec($curl),true);
     curl_close($curl);
 
-    $affixes_formatted .= new Affix($affix['name'],$affix['id'],$affix_description['description'],null);
+    $affixes_formatted .= "<div class='hover-target' data-text='{$affix_description['description']}'> Affix Name: " . $affix['name'] . "\n Description:" . "</div>" .
+    "<div class='hover-text' id='hoverText'></div>
+    ";
 
       
 };
@@ -167,26 +170,24 @@ function blizzard_api_affixes() {
 
 
   var_dump($result);
-return display_affixes($result,$my_creds) . '<script>
-    function getId(){
-        document.addEventListener("mouseover", function(event)) {
-            const hoveredElement = event.target; // Get the element under the cursor
-            const elementId = hoveredElement.id; // Get the ID of the element
-            };
-            return elementId;
-    }
-    
-    const myDiv = document.getElementById(getId());
-    const hoverText = document.getElementById(getId());
+return display_affixes($result,$my_creds) . "<script>
+    const hoverTargets = document.querySelectorAll('.hover-target');
+    const hoverText = document.getElementById('hoverText');
 
-    myDiv.addEventListener("mouseover", () => {
-      hoverText.style.display = "block";
-    });
+    hoverTargets.forEach(target => {
+        target.addEventListener('mouseenter', () => {
+            hoverText.textContent = target.getAttribute('data-text'); // Set the hover text
+            hoverText.style.display = 'block'; // Show text on hover
+            const rect = target.getBoundingClientRect();
+            hoverText.style.top = `${rect.bottom + window.scrollY}px`; // Position below the hovered element
+            hoverText.style.left = `${rect.left}px`; // Align with the left of the hovered element
+        });
 
-    myDiv.addEventListener("mouseout", () => {
-      hoverText.style.display = "none";
+        target.addEventListener('mouseleave', () => {
+            hoverText.style.display = 'none'; // Hide text when not hovering
+        });
     });
-    </script>';
+</script>";
 };
     
 add_shortcode('affix_index','blizzard_api_affixes');
