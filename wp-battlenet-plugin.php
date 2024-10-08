@@ -88,7 +88,16 @@ function blizzard_api_token_cost() {
     
 add_shortcode('token_cost','blizzard_api_token_cost');
 
-//
+function display_affixes($result){
+  $affixes_formatted = '';
+  foreach ($result['affixes'] as $index => $affix) {
+    $affixes_formatted .= "<div id='" . ($index + 1) . "'> Affix Name: " . $affix['name'] . "</div>";
+
+      
+};
+  return $affixes_formatted;
+}
+
 function blizzard_api_affixes() {
   $my_creds = new Credentials();
   $client_id = $my_creds -> get_client_id();
@@ -108,16 +117,6 @@ function blizzard_api_affixes() {
   $result = json_decode(curl_exec($curl),true);
   curl_close($curl);
   
-function display_affixes($result){
-    $affixes_formatted = '';
-    foreach ($result['affixes'] as $index => $affix) {
-      $affixes_formatted .= "<div id='" . ($index + 1) . "'> Affix Name: " . $affix['name'] . "</div>";
-
-        
-  };
-    return $affixes_formatted;
-  }
-
 return display_affixes($result) . '<script>
     function getId(){
         document.addEventListener("mouseover", function(event)) {
