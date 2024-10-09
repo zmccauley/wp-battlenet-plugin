@@ -147,7 +147,6 @@ function my_affix_description_handler() {
   } else {
      wp_send_json_error('Error fetching data');
   }
-  return;
 }
 
 add_action('wp_ajax_my_affix_description', 'my_affix_description_handler');
