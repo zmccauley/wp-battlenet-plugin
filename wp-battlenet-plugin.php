@@ -119,8 +119,7 @@ function blizzard_api_token_cost() {
 }
     
 add_shortcode('token_cost','blizzard_api_token_cost');
-add_action('wp_ajax_my_affix_description', 'my_affix_description_handler');
-add_action('wp_ajax_nopriv_my_affix_description', 'my_affix_description_handler');
+
 function my_affix_description_handler() {
   $my_creds = new Credentials();  
   $access_token = $my_creds->get_access_token_data();
@@ -150,7 +149,8 @@ function my_affix_description_handler() {
   }
 }
 
-
+add_action('wp_ajax_my_affix_description', 'my_affix_description_handler');
+add_action('wp_ajax_nopriv_my_affix_description', 'my_affix_description_handler');
 
 
 function display_affixes($result){
@@ -199,7 +199,7 @@ return "<div class='hover-text' id='hoverText'></div>" . display_affixes($result
     </style>
 
 <script>
-    const hoverTargets = document.querySelectorAll('.hover-target');
+        const hoverTargets = document.querySelectorAll('.hover-target');
         const hoverText = document.getElementById('hoverText');
 
         hoverTargets.forEach(target => {
@@ -207,7 +207,7 @@ return "<div class='hover-text' id='hoverText'></div>" . display_affixes($result
                 const affixId = target.getAttribute('data-id'); // Get the affix ID
 
                 // Make AJAX call to get affix description
-                fetch(`{${my_ajax_object.ajax_url}}?action=my_affix_description&affix_id={${affixId}}`)
+                fetch(`${my_ajax_object.ajax_url}?action=my_affix_description&affix_id=${affixId}`)
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
