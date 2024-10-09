@@ -119,7 +119,8 @@ function blizzard_api_token_cost() {
 }
     
 add_shortcode('token_cost','blizzard_api_token_cost');
-
+add_action('wp_ajax_my_affix_description', 'my_affix_description_handler');
+add_action('wp_ajax_nopriv_my_affix_description', 'my_affix_description_handler');
 function my_affix_description_handler() {
   $my_creds = new Credentials();  
   $access_token = $my_creds->get_access_token_data();
@@ -149,8 +150,7 @@ function my_affix_description_handler() {
   }
 }
 
-add_action('wp_ajax_my_affix_description', 'my_affix_description_handler');
-add_action('wp_ajax_nopriv_my_affix_description', 'my_affix_description_handler');
+
 
 
 function display_affixes($result){
