@@ -179,7 +179,7 @@ function blizzard_api_affixes() {
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
   $result = json_decode(curl_exec($curl),true);
   curl_close($curl);
-
+var_dump($result);
 return "<div class='hover-text' id='hoverText'></div>" . display_affixes($result) .  "
 <style>
         .hover-target {
