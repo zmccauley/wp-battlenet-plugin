@@ -204,9 +204,6 @@ return "<div class='hover-text' id='hoverText'></div>" . display_affixes($result
     const hoverTargets = document.querySelectorAll('.hover-target');
     const hoverText = document.getElementById('hoverText');
 
-    const hoverTargets = document.querySelectorAll('.hover-target');
-const hoverText = document.getElementById('hoverText');
-
 hoverTargets.forEach(target => {
     target.addEventListener('mouseenter', () => {
         const affixId = target.getAttribute('data-id'); // Assuming the element has a data-id attribute for the affix ID
