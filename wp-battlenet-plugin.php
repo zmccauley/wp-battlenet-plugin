@@ -156,8 +156,7 @@ add_action('wp_ajax_nopriv_my_affix_description', 'my_affix_description_handler'
 function display_affixes($result){
   $affixes_formatted = '';
   foreach ($result['affixes'] as $index => $affix) {
-    $affixes_formatted .= "<div style='display:block;' class='hover-target' data-text=''>" . $affix['name'] . "</div>";
-    ;
+    $affixes_formatted .= "<div style='display:block;' class='hover-target' data-id='" . $result['id'] . "' data-text=''>" . $affix['name'] . "</div>";
 };
   return $affixes_formatted;
 }
@@ -181,7 +180,7 @@ function blizzard_api_affixes() {
   $result = json_decode(curl_exec($curl),true);
   curl_close($curl);
 
-return "<div class='hover-text' id='hoverText'></div>" . display_affixes($result,$my_creds) .  "
+return "<div class='hover-text' id='hoverText'></div>" . display_affixes($result) .  "
 <style>
         .hover-target {
             display: inline-block;
