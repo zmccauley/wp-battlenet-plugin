@@ -143,9 +143,9 @@ function my_affix_description_handler() {
   
   // Return the response
   if ($response) {
-      wp_send_json_success(json_decode($response, true));
+      return wp_send_json_success(json_decode($response, true));
   } else {
-      wp_send_json_error('Error fetching data');
+     return wp_send_json_error('Error fetching data');
   }
 }
 
