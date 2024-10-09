@@ -156,7 +156,7 @@ add_action('wp_ajax_nopriv_my_affix_description', 'my_affix_description_handler'
 function display_affixes($result){
   $affixes_formatted = '';
   foreach ($result['affixes'] as $index => $affix) {
-    $affixes_formatted .= "<div style='display:block;' class='hover-target' data-id='" . $result['id'] . "' data-text=''>" . $affix['name'] . "</div>";
+    $affixes_formatted .= "<div style='display:block;' class='hover-target' data-id='" . $result['key'] . "' data-text=''>" . $affix['name'] . "</div>";
 };
   return $affixes_formatted;
 }
