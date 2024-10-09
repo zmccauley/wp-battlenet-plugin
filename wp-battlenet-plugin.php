@@ -212,7 +212,7 @@ hoverTargets.forEach(target => {
         const affixId = target.getAttribute('data-id'); // Assuming the element has a data-id attribute for the affix ID
 
         // Make AJAX call to get affix description
-        fetch(${my_ajax_object.ajax_url}?action=my_affix_description&affix_id={${affixId}}`)
+        fetch({${my_ajax_object.ajax_url}}?action=my_affix_description&affix_id={${affixId}}`)
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
