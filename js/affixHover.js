@@ -1,4 +1,4 @@
-const hoverTargets = document.querySelectorAll('.hover-target');
+    const hoverTargets = document.querySelectorAll('.hover-target');
       const hoverText = document.getElementById('hoverText');
 
       hoverTargets.forEach(target => {
