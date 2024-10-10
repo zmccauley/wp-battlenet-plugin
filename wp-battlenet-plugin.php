@@ -120,6 +120,16 @@ function blizzard_api_token_cost() {
     
 add_shortcode('token_cost','blizzard_api_token_cost');
 
+function my_enqueue_scripts() {
+  wp_enqueue_script('enque', plugin_dir_url(__FILE__) . 'js/enque.js', array('jquery'), null, true);
+
+  wp_localize_script('enque', 'my_ajax_object', array(
+      'ajax_url' => admin_url('admin-ajax.php')
+  ));
+}
+add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
+
+
 function my_affix_description_handler() {
   $my_creds = new Credentials();  
   $access_token = $my_creds->get_access_token_data();
@@ -179,59 +189,57 @@ function blizzard_api_affixes() {
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
   $result = json_decode(curl_exec($curl),true);
   curl_close($curl);
-return "<div class='hover-text' id='hoverText'></div>" . display_affixes($result) .  "
-<style>
-        .hover-target {
-            display: inline-block;
-            cursor: pointer;
-            margin: 5px; /* Add some space between elements */
-        }
+  return "<div class='hover-text' id='hoverText'></div>" . display_affixes($result) .  "
+  <style>
+      .hover-target {
+          display: inline-block;
+          cursor: pointer;
+          margin: 5px;
+      }
+      .hover-text {
+          display: none;
+          position: absolute;
+          background-color: #f0f0f0;
+          border: 1px solid #ccc;
+          padding: 5px;
+          margin-top: 5px;
+          z-index: 10;
+      }
+  </style>
+  <script>
+      const hoverTargets = document.querySelectorAll('.hover-target');
+      const hoverText = document.getElementById('hoverText');
 
-        .hover-text {
-            display: none; /* Initially hide the hover text */
-            position: absolute; /* Position it relative to the document */
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            padding: 5px;
-            margin-top: 5px;
-            z-index: 10;
-        }
-    </style>
+      hoverTargets.forEach(target => {
+          target.addEventListener('mouseenter', () => {
+              const affixId = target.getAttribute('data-id'); // Get the affix ID
 
-<script>
-     const hoverTargets = document.querySelectorAll('.hover-target');
-const hoverText = document.getElementById('hoverText');
+              // Make AJAX call to get affix description
+              fetch(my_ajax_object.ajax_url + '?action=my_affix_description&affix_id=' + affixId)
+                  .then(response => response.json())
+                  .then(data => {
+                      if (data.success) {
+                          hoverText.textContent = data.data.description;
+                          hoverText.style.display = 'block';
 
-hoverTargets.forEach(target => {
-    target.addEventListener('mouseenter', () => {
-        const affixId = target.getAttribute('data-id'); // Get the affix ID
+                          const rect = target.getBoundingClientRect();
+                          hoverText.style.top = (rect.bottom + window.scrollY) + 'px';
+                          hoverText.style.left = rect.left + 'px';
+                      } else {
+                          console.error('Error:', data.data);
+                      }
+                  })
+                  .catch(error => console.error('Fetch error:', error));
+          });
 
-        // Make AJAX call to get affix description
-        fetch(my_ajax_object.ajax_url + '?action=my_affix_description&affix_id=' + affixId)
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    hoverText.textContent = data.data.description; // Use the correct key based on the API response
-                    hoverText.style.display = 'block';
-
-                    const rect = target.getBoundingClientRect();
-                    hoverText.style.top = (rect.bottom + window.scrollY) + 'px';
-                    hoverText.style.left = rect.left + 'px';
-                } else {
-                    console.error('Error:', data.data);
-                }
-            })
-            .catch(error => console.error('Fetch error:', error));
-    });
-
-    target.addEventListener('mouseleave', () => {
-        hoverText.style.display = 'none'; // Hide text when not hovering
-    });
-});
-
-</script>";
+          target.addEventListener('mouseleave', () => {
+              hoverText.style.display = 'none';
+          });
+      });
+  </script>"
+;
 };
-    
+
 add_shortcode('affix_index','blizzard_api_affixes');
 //
 
