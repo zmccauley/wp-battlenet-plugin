@@ -104,18 +104,7 @@ function blizzard_api_token_cost() {
   curl_close($curl);
   $gold_value = number_format(intval(json_decode($result)-> price) / 100 / 100);
   return "<h1>The present value of a WoW token is {$gold_value} gold</h1><br><p>- via the <a href='https://develop.battle.net/documentation/world-of-warcraft/game-data-apis' 
-  target='_blank'>Blizzard API</a></p><br><div id='dateTime'></div>
-
-    <script>
-        function updateDateTime() {
-            const now = new Date();
-            const dateTimeString = now.toLocaleString(); // Formats date and time based on the user's locale
-            document.getElementById('dateTime').textContent = dateTimeString;
-        }
-
-        updateDateTime(); // Initial call
-        setInterval(updateDateTime, 1000); // Update every second
-    </script>";
+  target='_blank'>Blizzard API</a></p><br><div id='dateTime'></div><script src='/js/affixHover.js'></script>";
 }
     
 add_shortcode('token_cost','blizzard_api_token_cost');
