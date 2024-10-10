@@ -104,7 +104,7 @@ function blizzard_api_token_cost() {
   curl_close($curl);
   $gold_value = number_format(intval(json_decode($result)-> price) / 100 / 100);
   return "<h1>The present value of a WoW token is {$gold_value} gold</h1><br><p>- via the <a href='https://develop.battle.net/documentation/world-of-warcraft/game-data-apis' 
-  target='_blank'>Blizzard API</a></p><br><div id='dateTime'></div><script src='/js/getTime.js'></script>";
+  target='_blank'>Blizzard API</a></p><br><div id='dateTime'></div><script src='/var/www/html/wp-content/plugins/wp-battlenet-plugin/js/getTime.js'></script>";
 }
     
 add_shortcode('token_cost','blizzard_api_token_cost');
