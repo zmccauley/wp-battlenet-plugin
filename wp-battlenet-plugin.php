@@ -192,12 +192,13 @@ add_action('admin_menu', 'fsdapikey_register_my_api_keys_page');
 
 function fsdapikey_register_my_api_keys_page() {
   add_submenu_page(
-    'tools.php',
-    'API Keys',
-    'API Keys',
-    'manage_options',
-    'api-keys',
-    'fsdapikey_add_api_keys_callback'
+      'tools.php',
+      'API Keys',
+      'API Keys',
+      'manage_options',
+      'api-keys',
+      'fsdapikey_add_api_keys_callback'
+  );
 }
 function fsdapikey_add_api_keys_callback() { ?>
 
