@@ -3,9 +3,8 @@ const hoverText = document.getElementById('hoverText');
 
 hoverTargets.forEach(target => {
     target.addEventListener('mouseenter', () => {
-        const affixId = target.getAttribute('data-id'); // Get the affix ID
+        const affixId = target.getAttribute('data-id');
 
-        // Make AJAX call to get affix description
         fetch(my_ajax_object.ajax_url + '?action=my_affix_description&affix_id=' + affixId)
             .then(response => response.json())
             .then(data => {
